@@ -1,0 +1,1 @@
+It's hard to see because both 500 ms and 5000 ms are really really small. If we boost the delay more, the iterations will take longer and we can see each iteration finish.

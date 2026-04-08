@@ -1,4 +1,8 @@
 /* C program to demonstrate the use of fork()*/
+//Name: Armaan Sharma
+// Date: April 7, 2026
+// Title: Lab2 – Step 1 - Child process executes a command
+// Description: This program creates a child process to execute the ls command.
 #include <stdio.h> /* printf, stderr */
 #include <sys/types.h> /* pid_t */
 #include <unistd.h> /* fork */

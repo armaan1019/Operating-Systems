@@ -1,4 +1,8 @@
 /* C program to demonstrate the use of fork()*/
+//Name: Armaan Sharma
+// Date: April 7, 2026
+// Title: Lab2 – Step 5 - C program using 4 processes
+// Description: This program uses four processes with four different delays entered by the user
 #include <stdio.h> /* printf, stderr */
 #include <sys/types.h> /* pid_t */
 #include <unistd.h> /* fork */

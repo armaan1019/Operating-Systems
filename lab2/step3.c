@@ -1,4 +1,8 @@
 /* C program to demonstrate the use of fork()*/
+//Name: Armaan Sharma
+// Date: April 7, 2026
+// Title: Lab2 – Step 3 - command line delay
+// Description: This program uses the users input as delay
 #include <stdio.h> /* printf, stderr */
 #include <sys/types.h> /* pid_t */
 #include <unistd.h> /* fork */

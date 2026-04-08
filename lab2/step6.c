@@ -1,4 +1,8 @@
 /* C program to demonstrate the use of fork()*/
+//Name: Armaan Sharma
+// Date: April 7, 2026
+// Title: Lab2 – Step 1 - C proccesses
+// Description: This program uses five processes
 #include <stdio.h> /* printf, stderr */
 #include <sys/types.h> /* pid_t */
 #include <unistd.h> /* fork */
@@ -54,14 +58,14 @@ int main(int argc, char *argv[]) {
     if(pid == 0) process_id = 4;
   }
 
-  for (int i=0;i<10;i++) { // waits for all children processes to finish
+  for (int i=0;i<10;i++) {
     printf("Process %d (PID %d) iteration %d\n", process_id, getpid(), i);
     usleep(delays[process_id]);
   }
 
   if(process_id == 0) {
     for(int i = 0; i < 4; i++) {
-      wait(NULL);
+      wait(NULL); // Wait for all children processes to finish
     }
   }
 
