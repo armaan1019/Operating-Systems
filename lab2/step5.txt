@@ -1,1 +1,1 @@
-It's hard to see because both 500 ms and 5000 ms are really really small. If we boost the delay more, the iterations will take longer and we can see each iteration finish.
+It's hard to see because both 500 ms and 5000 ms are really really small. If we boost the delay more, the iterations will take longer and we can see each iteration finish. With a longer delay, the processes are more likely to come in order whereas there's a chance it comes out of order with a small delay. In practice, it's hard to do since the OS scheduler is very consistent.
