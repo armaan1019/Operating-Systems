@@ -1,0 +1,1 @@
+I noticed that this program is executing the ls command and the more command concurrently. One process is writing to one end of the pipe and another process is reading at the other end of the pipe. The program doesn't exit right after running the ls -l command because of the more command which runs after.
