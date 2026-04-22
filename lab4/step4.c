@@ -1,3 +1,9 @@
+// Name: Armaan Sharma
+// Date: April 21, 2026
+// Title: Lab 4 – Step 4 - matrix multiplication.
+// Description: This program creates a thread for every cell.
+// Each thread calculates the value for that cell.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>

@@ -1,3 +1,8 @@
+// Name: Armaan Sharma
+// Date: April 21, 2026
+// Title: Lab 4 – Step 1 - sample program.
+// Description: This program is a sample program which creates 10 threads.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>

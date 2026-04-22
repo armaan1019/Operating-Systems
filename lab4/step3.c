@@ -1,3 +1,9 @@
+// Name: Armaan Sharma
+// Date: April 21, 2026
+// Title: Lab 4 – Step 3 - Matrix multiplication.
+// Description: This program creates a thread for each row
+// and each thread calculates the entire row.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -17,7 +23,7 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  N = atoi(argv[1]);
+  N = atoi(argv[1]); // get matrix sizes
   M = atoi(argv[2]);
   L = atoi(argv[3]);
 
@@ -26,19 +32,19 @@ int main(int argc, char *argv[]) {
   matrixA = initializeMatrix(N, M);
   matrixB = initializeMatrix(M, L);
 
-  matrixC = malloc(N * sizeof(double *));
+  matrixC = malloc(N * sizeof(double *)); // allocate memory
   for(int i = 0; i < N; i++) {
     matrixC[i] = malloc(L * sizeof(double));
   }
 
   threads = malloc(N * sizeof(pthread_t));
 
-  for(int i = 0; i < N; i++) {
+  for(int i = 0; i < N; i++) { // create N threads
     pthread_create(&threads[i], NULL, multiplyRow, (void *)(size_t)i);
   }
 
   for(int i = 0; i < N; i++) {
-    pthread_join(threads[i], NULL);
+    pthread_join(threads[i], NULL); // Wait
   }
 
   printf("\nMatrix A: \n");
@@ -50,7 +56,7 @@ int main(int argc, char *argv[]) {
   printf("\nMatrix C:\n");
   printMatrix(N, L, matrixC);
 
-  for(int i = 0; i < N; i++) {
+  for(int i = 0; i < N; i++) { // free memory
     free(matrixA[i]);
     free(matrixC[i]);
   }
@@ -66,11 +72,11 @@ int main(int argc, char *argv[]) {
 }
 
 double **initializeMatrix(int r, int c) {
-  double **matrix = malloc(r * sizeof(double *));
+  double **matrix = malloc(r * sizeof(double *)); // Allocate memory
   for(int i = 0; i < r; i++) {
     matrix[i] = malloc(c * sizeof(double));
     for(int j = 0; j < c; j++) {
-      matrix[i][j] = rand() % 10;
+      matrix[i][j] = rand() % 10; // Low numbers
     }
   }
 
@@ -78,11 +84,11 @@ double **initializeMatrix(int r, int c) {
 }
 
 void *multiplyRow(void *arg) {
-  int i = (int)(size_t)arg;
+  int i = (int)(size_t)arg; // Compute row i 
 
-  for(int j = 0; j < L; j++) {
+  for(int j = 0; j < L; j++) { // col for B
     double temp = 0;
-    for(int k = 0; k < M; k++) {
+    for(int k = 0; k < M; k++) { // row for B, col for A
       temp += matrixA[i][k] * matrixB[k][j];
     }
     matrixC[i][j] = temp;
@@ -91,7 +97,7 @@ void *multiplyRow(void *arg) {
 }
 
 void printMatrix(int r, int c, double **matrix) {
-  for(int i = 0; i < r; i++) {
+  for(int i = 0; i < r; i++) { // print matrix
     for(int j = 0; j < c; j++) {
       printf("%6.1f ", matrix[i][j]);
     }

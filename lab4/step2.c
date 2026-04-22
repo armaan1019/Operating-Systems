@@ -1,3 +1,9 @@
+// Name: Armaan Sharma
+// Date: April 21, 2026
+// Title: Lab 4 – Step 2 - sample program. Fix
+// Description: This program is a sample program which creates 10 threads.
+// Each thread now has its own argument of i.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -8,7 +14,7 @@ int main() {
   int i;
   int args[NTHREADS];
   for (i = 0; i < NTHREADS; i++) {
-    args[i] = i;
+    args[i] = i; // give each thread its own argument
     pthread_create(&threads[i], NULL, go, &args[i]);
   }
   for (i = 0; i < NTHREADS; i++) {

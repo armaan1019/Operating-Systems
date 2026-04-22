@@ -1,3 +1,8 @@
+// Name: Armaan Sharma
+// Date: April 14, 2026
+// Title: Lab 3 – Step 2 - sample program. 
+// Description: This program uses a pipe to display the arguments written on the command line.
+
 /*Sample C program for Lab 3*/
 #include <stdio.h>
 #include <unistd.h>

@@ -1,6 +1,6 @@
 // Name: Armaan Sharma
 // Date: April 14, 2026
-// Title: Lab2 – Step 1 - sample program. Alter to add -l flag to ls
+// Title: Lab 3 – Step 1 - sample program. Alter to add -l flag to ls
 // Description: This program is a sample program which calls the ls command
 
 /*Sample C program for Lab 3*/
