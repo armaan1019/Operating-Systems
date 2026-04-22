@@ -37,8 +37,8 @@ int main() {
 
     wait(NULL);
 
-    shmdt(data);
-    shmctl(shmid, IPC_RMID, NULL); //detach
+    shmdt(data); //detach
+    shmctl(shmid, IPC_RMID, NULL);
   } else {
     for(int i = 1; i <= 10; i++) {
       while(data->count == 0);
@@ -47,7 +47,7 @@ int main() {
       data->count--;
 
       printf("Consumed: %d\n", item);
-      sleep(2);
+      sleep(1);
     }
 
     shmdt(data);
