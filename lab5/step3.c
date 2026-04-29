@@ -14,7 +14,7 @@
 
 #define BUFFER_SIZE 10
 
-volatile sig_atomic_t running = 1;
+volatile sig_atomic_t running = 1; // For clean exit
 
 int buffer[BUFFER_SIZE];
 int in = 0;
@@ -28,16 +28,16 @@ void* producer(void* arg) {
   int item;
 
   while(running) {
-    item = rand() % 100;
+    item = rand() % 100; // generate number
     printf("Produced: %d\n", item);
 
-    sem_wait(empty);
+    sem_wait(empty); // decrement
     sem_wait(mutex);
 
-    buffer[in] = item;
+    buffer[in] = item; // Add to buffer
     in = (in + 1) % BUFFER_SIZE;
 
-    sem_post(mutex);
+    sem_post(mutex); // increment
     sem_post(full);
     
     sleep(1);
@@ -69,28 +69,28 @@ void cleanup(int sig) {
   printf("\nCleaning up semaphores...\n");
   running = 0;
 
-  sem_post(empty);
+  sem_post(empty); // Wake threads
   sem_post(full);
 }
 
 int main() {
   pthread_t p, c;
 
-  sem_unlink("/empty");
+  sem_unlink("/empty"); // Unlink for previous runs
   sem_unlink("/full");
   sem_unlink("/mutex");
   
-  empty = sem_open("/empty", O_CREAT, 0644, BUFFER_SIZE);
+  empty = sem_open("/empty", O_CREAT, 0644, BUFFER_SIZE); // Create
   full = sem_open("/full", O_CREAT, 0644, 0);
   mutex = sem_open("/mutex", O_CREAT, 0644, 1);
 
-  signal(SIGINT, cleanup);
+  signal(SIGINT, cleanup); // Ctrl c
 
-  pthread_create(&p, NULL, producer, NULL);
+  pthread_create(&p, NULL, producer, NULL); // Create threads
   pthread_create(&c, NULL, consumer, NULL);
 
-  pthread_join(p, NULL);
-  pthread_join(c, NULL);
+  pthread_join(p, NULL); // Never runs because of infinite loop
+  pthread_join(c, NULL); // but good practice
 
   sem_close(empty);
   sem_close(full);

@@ -19,7 +19,7 @@ volatile sig_atomic_t running = 1;
 int buffer[BUFFER_SIZE];
 int in = 0;
 int out = 0;
-int count = 0;
+int count = 0; // How much is in buffer
 
 pthread_mutex_t lock;
 pthread_cond_t full;
@@ -29,17 +29,17 @@ void* producer(void* arg) {
   int item;
 
   while(1) {
-    pthread_mutex_lock(&lock);
+    pthread_mutex_lock(&lock); // obtain lock
 
-    if(!running) {
-      pthread_mutex_unlock(&lock);
+    if(!running) { // For clean exit
+      pthread_mutex_unlock(&lock); 
       break;
     }
 
-    item = rand() % 100;
+    item = rand() % 100; // Generate
     printf("Produced %d\n", item);
     while(count == BUFFER_SIZE) {
-      pthread_cond_wait(&empty, &lock);
+      pthread_cond_wait(&empty, &lock); // Avoid busy waiting
     }
 
     if(!running) {
@@ -47,12 +47,12 @@ void* producer(void* arg) {
       break;
     }
 
-    buffer[in] = item;
+    buffer[in] = item; // Add to buffer
     in = (in + 1) % BUFFER_SIZE;
     count++;
 
-    pthread_cond_signal(&full);
-    pthread_mutex_unlock(&lock);
+    pthread_cond_signal(&full); // Send signal
+    pthread_mutex_unlock(&lock); // release lock
 
     sleep(1);
   }
@@ -64,7 +64,7 @@ void* consumer(void* arg) {
   int item;
 
   while(1) {
-    pthread_mutex_lock(&lock);
+    pthread_mutex_lock(&lock); // obtain lock
 
     if(!running) {
       pthread_mutex_unlock(&lock);
@@ -80,7 +80,7 @@ void* consumer(void* arg) {
       break;
     }
 
-    item = buffer[out];
+    item = buffer[out]; // Take away from buffer
     out = (out + 1) % BUFFER_SIZE;
     count--;
 
@@ -98,18 +98,18 @@ void cleanup() {
   printf("Stopping...");
   running = 0;
 
-  pthread_cond_broadcast(&full);
+  pthread_cond_broadcast(&full); // Wake threads
   pthread_cond_broadcast(&empty);
 }
 
 int main() {
   pthread_t p, c;
 
-  pthread_mutex_init(&lock, NULL);
-  pthread_cond_init(&full, NULL);
+  pthread_mutex_init(&lock, NULL); // Create lock
+  pthread_cond_init(&full, NULL); // create condition variables
   pthread_cond_init(&empty, NULL);
 
-  signal(SIGINT, cleanup);
+  signal(SIGINT, cleanup); // Ctrl C
 
   pthread_create(&p, NULL, producer, NULL);
   pthread_create(&c, NULL, consumer, NULL);
