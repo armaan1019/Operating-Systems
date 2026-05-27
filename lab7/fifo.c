@@ -21,6 +21,10 @@ int main(int argc, char *argv[]) {
   int placeInArray = 0;
 
   while(fgets(pageCache, MAX_LINE, stdin)) {
+    if(pageCache[0] < '0' || pageCache[0] > '9') {
+      continue;
+    }
+
     int page_num = atoi(pageCache);
 
     int found = 0;
