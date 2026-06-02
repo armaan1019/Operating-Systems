@@ -12,3 +12,9 @@ Lab 3: Producer/Consumer. Shared memory. Using pipes to execute commands and sol
 Lab 4: Using pthreads to create a program to compute matrix multiplication. One program creates a thread for each row and the other created a thread for each cell.
 
 Lab 5: Using semaphores and mutex locks to solve the producer/consumer problem.
+
+Lab 6(Not Displayed): Got familiar with the Minix Operating System. Modified priority scheduling algorithm.
+
+Lab 7: Memory Management. Simulating page replacement algorithms like LRU, FIFO, and Clock.
+
+Lab 8: File performance measurement. Explored the affects of page size, system calls, # of threads, and buffer size when reading/writing files.
